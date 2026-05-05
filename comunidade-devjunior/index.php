@@ -43,6 +43,29 @@ require_once "database/db.php";
     <center>
         <h2>Bem-vindo à <?php echo PROJECT_NAME; ?>!</h2>
     </center>
+    <div class="postagens_last">
+        <?php 
+        require_once "class/list.php"; 
+            $sql->execute();
+            $posts = $sql->fetchAll(PDO::FETCH_ASSOC);
+            foreach($posts as $post){
+                echo "
+                <div class='card mb-3'>
+                    <div class='card-body'>
+                        <h5 class='card-title'>". @$post['title'] ."</h5>
+                        <p class='card-text'>". @$post['content'] ."</p>
+                        <p class='card-text'><small class='text-muted'>Autor: ". @$post['author'] ."</small></p>
+                        <p class='card-text'><small class='text-muted'>Categoria: ". @$post['category'] ."</small></p>
+                        <p class='card-text'><small class='text-muted'>Publicado em: ". date('d/m/Y H:i', strtotime(@$post['created_at'])) ."</small></p>
+                    </div>
+                </div>
+                ";
+            }
+        
+        ?>
+
+
+    </div>
 
 </main>
 
@@ -50,11 +73,14 @@ require_once "database/db.php";
 <hr>
     <div class="container">
         <div class="maintext" style="text-align: center;">
-            <p>A <?php echo PROJECT_NAME; ?> é um espaço dedicado a desenvolvedores iniciantes, onde você pode aprender, compartilhar conhecimento e crescer na sua jornada de desenvolvimento. Aqui, você encontrará recursos, tutoriais, projetos e uma comunidade acolhedora para ajudá-lo a se tornar um desenvolvedor mais confiante e habilidoso.</p>
-            <p>Seja você um estudante, um entusiasta ou alguém que está começando a explorar o mundo do desenvolvimento, a <?php echo PROJECT_NAME; ?>   é o lugar perfeito para você. Junte-se a nós e faça parte dessa comunidade incrível de desenvolvedores iniciantes!</p>
+                <i>
+                    <p>A <i><?php echo PROJECT_NAME; ?></i> é um espaço para desenvolvedores iniciantes <b> aprenderem, compartilharem conhecimento e crescerem</b>. 
+                    <p>Encontre recursos, tutoriais, projetos e uma comunidade acolhedora para se tornar um desenvolvedor mais confiante.</p>
+                    <p>Seja estudante, entusiasta ou iniciante, a <i><?php echo PROJECT_NAME; ?></i> é perfeita para você. Junte-se a nós!</p>
 
+                </i>    
         </div>
-        <p>&copy; 2026 <?php echo PROJECT_NAME; ?>. Todos os direitos reservados.</p>
+        <p>&copy; 2026 <i><?php echo PROJECT_NAME; ?></i>. Todos os direitos reservados.</p>
     </div>
 </footer>
 
